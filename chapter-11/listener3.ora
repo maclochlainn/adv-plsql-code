@@ -1,0 +1,55 @@
+#
+#  listener3.ora
+#  Chapter 13, Oracle Database 11g PL/SQL Programming
+#  by Michael McLaughlin
+# 
+#  listener3.ora
+#  Chapter 12, Oracle10g PL/SQL Programming
+#  by Ron Hardman, Michael McLaughlin and Scott Urman
+# 
+#  Standard two listener shell for listener.ora file.
+#  The extproc IPC listener is separated.
+#
+
+SID_LIST_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (SID_NAME = <database_sid>)
+      (ORACLE_HOME = <oracle_home_directory>)
+    )
+  )
+
+LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS_LIST =
+        (ADDRESS = 
+          (PROTOCOL = TCP)
+          (HOST = <machine_name>.<domain_name>)
+          (PORT = 1521)
+        )
+      )
+    )
+  ) 
+
+SID_LIST_CALLOUT_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (SID_NAME = PLSExtProc)
+      (ORACLE_HOME = <oracle_home_directory>)
+      (PROGRAM = extproc)
+      (ENV = "EXTPROC_DLLS=ONLY:<custom_dll_directory>/<custom_shared_library>:<custom_dll_directory>/<custom_shared_library>,LD_LIBRARY_PATH=<oracle_home_directory>/lib")
+    )
+  )
+
+CALLOUT_LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS_LIST =
+        (ADDRESS = 
+          (PROTOCOL = IPC)
+          (KEY = extproc)
+        )
+      )
+    )
+  ) 

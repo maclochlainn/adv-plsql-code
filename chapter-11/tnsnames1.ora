@@ -1,0 +1,34 @@
+#
+#  tnsnames1.ora
+#  Chapter 13, Oracle Database 11g PL/SQL Programming
+#  by Michael McLaughlin
+# 
+#  Standard single listener shell for tnsnames.ora file.
+#
+
+<database_sid> =
+  (DESCRIPTION =
+    (ADDRESS = 
+      (PROTOCOL = TCP)
+      (HOST = <machine_name>.<domain_name>)
+      (PORT = <port_number>)
+    )
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = <database_sid>)
+    )
+  )
+
+EXTPROC_CONNECTION_DATA =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = 
+        (PROTOCOL = IPC)
+        (KEY = extproc))
+    )
+    (CONNECT_DATA =
+      (SID = PLSExtProc)
+      (PRESENTATION = RO)
+    )
+  )
+
